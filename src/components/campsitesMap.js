@@ -3,6 +3,7 @@ import {
   MapView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View
 } from 'react-native';
 
@@ -17,8 +18,18 @@ module.exports = React.createClass({
 
   render() {
     var campsiteAnnos = Campsites.map(function(c) {
-      return {longitude: c.longitude, latitude: c.latitude, title: c.sitename}
-    });
+      return {
+          longitude: c.longitude,
+          latitude: c.latitude,
+          title: c.sitename,
+          rightCalloutView: (
+            <TouchableOpacity
+              onPress={() => this.props.navigator.push({name: 'campsite'})}>
+              <Text>{'Details >'}</Text>
+            </TouchableOpacity>
+          )
+        }
+    }.bind(this));
     return (
       <View style={styles.container}>
         <MapView
@@ -35,7 +46,7 @@ module.exports = React.createClass({
           style={styles.map}>
         </MapView>
         <View style={styles.bottomView}>
-          <Text>Hi</Text>
+          <Text>YAY</Text>
         </View>
       </View>
     );
@@ -43,6 +54,13 @@ module.exports = React.createClass({
 
   onRegionChangeComplete: function(region){
     console.log(region);
+  },
+
+  onDetailsPress: function() {
+    console.log('hi');
+    this.props.navigator.push({
+      name: 'campsite'
+    });
   }
 });
 
@@ -58,5 +76,13 @@ const styles = StyleSheet.create({
   },
   bottomView: {
     flex: 1,
+  },
+  detailsButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 10,
+    borderColor: 'black',
   }
 });

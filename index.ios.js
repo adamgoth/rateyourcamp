@@ -7,9 +7,11 @@ import {
   View
 } from 'react-native';
 import CampsitesMap from './src/components/campsitesMap';
+import Campsite from './src/components/campsite';
 
 var ROUTES = {
   campsitesMap: CampsitesMap,
+  campsite: Campsite,
 }
 
 var rateyourcamp = React.createClass({
