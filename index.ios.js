@@ -1,53 +1,58 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
-import React, { Component } from 'react';
+import React from 'react';
 import {
   AppRegistry,
+  MapView,
   StyleSheet,
   Text,
   View
 } from 'react-native';
+import Campsites from './ios/src/data/campsites';
 
-class rateyourcamp extends Component {
+var rateyourcamp = React.createClass({
+  getInitialState: function() {
+    return {
+
+    };
+  },
+
   render() {
+    var campsiteAnnos = Campsites.map(function(c) {
+      return {longitude: c.longitude, latitude: c.latitude, title: c.sitename}
+    });
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
+        <MapView
+          annotations={campsiteAnnos}
+          onRegionChangeComplete={this.onRegionChangeComplete}
+          region={
+            {
+              latitude: 48,
+              longitude: -109,
+              latitudeDelta: 80,
+              longitudeDelta: 125
+            }
+          }
+          style={styles.map}>
+        </MapView>
       </View>
     );
+  },
+
+  onRegionChangeComplete: function(region){
+    console.log(region);
   }
-}
+});
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    alignItems: 'stretch',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  map: {
+    flex: 1,
+    marginTop: 30
+  }
 });
 
 AppRegistry.registerComponent('rateyourcamp', () => rateyourcamp);
