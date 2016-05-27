@@ -1,57 +1,37 @@
 import React from 'react';
 import {
   AppRegistry,
-  MapView,
+  Navigator,
   StyleSheet,
   Text,
   View
 } from 'react-native';
-import Campsites from './ios/src/data/campsites';
+import CampsitesMap from './src/components/campsitesMap';
+
+var ROUTES = {
+  campsitesMap: CampsitesMap,
+}
 
 var rateyourcamp = React.createClass({
-  getInitialState: function() {
-    return {
-
-    };
-  },
-
   render() {
-    var campsiteAnnos = Campsites.map(function(c) {
-      return {longitude: c.longitude, latitude: c.latitude, title: c.sitename}
-    });
     return (
-      <View style={styles.container}>
-        <MapView
-          annotations={campsiteAnnos}
-          onRegionChangeComplete={this.onRegionChangeComplete}
-          region={
-            {
-              latitude: 48,
-              longitude: -109,
-              latitudeDelta: 80,
-              longitudeDelta: 125
-            }
-          }
-          style={styles.map}>
-        </MapView>
-      </View>
+      <Navigator
+        style={styles.container}
+        initialRoute={{ name: 'campsitesMap'}}
+        renderScene={this.renderScene}
+        configureScene={() => { return Navigator.SceneConfigs.FloatFromRight; }}
+      />
     );
   },
-
-  onRegionChangeComplete: function(region){
-    console.log(region);
+  renderScene: function(route, navigator) {
+    var Component = ROUTES[route.name];
+    return <Component route={route} navigator={navigator} />;
   }
 });
 
-const styles = StyleSheet.create({
+var styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'stretch',
-  },
-  map: {
-    flex: 1,
-    marginTop: 30
   }
 });
 
