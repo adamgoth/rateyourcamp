@@ -27,7 +27,7 @@ var rateyourcamp = React.createClass({
   },
   renderScene: function(route, navigator) {
     var Component = ROUTES[route.name];
-    return <Component route={route} navigator={navigator} />;
+    return <Component route={route} navigator={navigator} {...route.passProps} />;
   }
 });
 
