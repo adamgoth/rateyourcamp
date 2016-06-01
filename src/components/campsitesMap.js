@@ -16,19 +16,43 @@ import API from '../data/api';
 module.exports = React.createClass({
   getInitialState: function() {
     return {
+      annotations: [],
       searchTerm: '',
       state: 'us',
       region: {longitudeDelta: 131.8359405964179, latitude: 52.49195113130104, longitude: -104.7812499009146, latitudeDelta: 69.54145563738211},
     };
   },
 
-  /*componentWillMount() {
+  componentWillMount() {
     API.allCampsites()
-      .then((data) => { console.log(data); })
-  },*/
+      .then((data) => {
+        this.setState({
+          annotations: data.map(function(c) {
+            return {
+              longitude: c.longitude,
+              latitude: c.latitude,
+              title: c.sitename,
+              rightCalloutView: (
+                <TouchableOpacity
+                  onPress={() => this.props.navigator.push({
+                    name: 'campsite',
+                    passProps: {
+                      sitename: c.sitename,
+                      id: c._id
+                    }
+                  })}>
+                  <Text>{'Details >'}</Text>
+                </TouchableOpacity>
+              )
+            }
+          }.bind(this))
+      })
+    })
+  },
 
   render() {
-    var campsiteAnnos = Campsites.map(function(c) {
+    debugger;
+    /*var campsiteAnnos = Campsites.map(function(c) {
       return {
         longitude: c.longitude,
         latitude: c.latitude,
@@ -46,12 +70,12 @@ module.exports = React.createClass({
           </TouchableOpacity>
         )
       }
-    }.bind(this));
+    }.bind(this));*/
 
     return (
       <View style={styles.container}>
         <MapView
-          annotations={campsiteAnnos}
+          annotations={this.state.annotations}
           onRegionChangeComplete={this.onRegionChangeComplete}
           region={this.state.region}
           style={styles.map}>
