@@ -36,7 +36,7 @@ module.exports = {
   'north dakota': {},
   ohio: {},
   oklahoma: {},
-  oregon: {},
+  oregon: {longitudeDelta: 10.00000035762787, latitude: 44.33047962112736, longitude: -120.4337682626283, latitudeDelta: 6.628466376328468},
   pennsylvania: {},
   'rhode island': {},
   'south carolina': {},

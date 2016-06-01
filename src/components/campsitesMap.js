@@ -10,7 +10,8 @@ import {
 } from 'react-native';
 
 import Campsites from '../data/campsites';
-import Regions from '../data/regions'
+import Regions from '../data/regions';
+import API from '../data/api';
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -20,6 +21,11 @@ module.exports = React.createClass({
       region: {longitudeDelta: 131.8359405964179, latitude: 52.49195113130104, longitude: -104.7812499009146, latitudeDelta: 69.54145563738211},
     };
   },
+
+  /*componentWillMount() {
+    API.allCampsites()
+      .then((data) => { console.log(data); })
+  },*/
 
   render() {
     var campsiteAnnos = Campsites.map(function(c) {
@@ -32,7 +38,8 @@ module.exports = React.createClass({
             onPress={() => this.props.navigator.push({
               name: 'campsite',
               passProps: {
-                sitename: c.sitename
+                sitename: c.sitename,
+                id: c._id
               }
             })}>
             <Text>{'Details >'}</Text>
@@ -50,9 +57,9 @@ module.exports = React.createClass({
           style={styles.map}>
         </MapView>
         <View style={styles.bottomView}>
+        <Text style={styles.text}>Search by campsite name:</Text>
         <TextInput
           style={styles.searchBar}
-          defaultValue="Search by campsite name..."
           onChangeText={(text) => this.setState({searchTerm: text})}
           value={this.state.searchTerm}
         />
@@ -83,6 +90,7 @@ module.exports = React.createClass({
             <Picker.Item label="Maryland" value={'maryland'} />
             <Picker.Item label="Massachusetts" value={'massachusetts'} />
             <Picker.Item label="New Mexico" value={'new mexico'} />
+            <Picker.Item label="Oregon" value={'oregon'} />
             <Picker.Item label="Utah" value={'utah'} />
           </Picker>
         </View>
@@ -114,7 +122,6 @@ const styles = StyleSheet.create({
   },
   searchBar: {
     padding: 10,
-    marginTop: 20,
     height: 40,
     width: 250,
     borderColor: 'gray',
@@ -122,12 +129,16 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignSelf: 'center',
   },
+  text: {
+    marginTop: 10,
+    alignSelf: 'center'
+  },
   map: {
-    flex: 4,
+    flex: 6,
     marginTop: 30
   },
   bottomView: {
-    flex: 3,
+    flex: 5,
   },
   detailsButton: {
     justifyContent: 'center',
