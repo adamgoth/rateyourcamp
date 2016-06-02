@@ -13,9 +13,9 @@ module.exports = React.createClass({
     return {
       sitename: '',
       longitude: 0,
-      longitudeDelta: .3,
+      longitudeDelta: .015,
       latitude: 0,
-      latitudeDelta: .3
+      latitudeDelta: .015
     }
   },
 

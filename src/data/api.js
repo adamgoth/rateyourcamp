@@ -21,8 +21,21 @@ module.exports = {
       })
   },
 
+  campsitesByState: function(state) {
+    var capped = state.replace(/\w\S*/g, word => {return word.charAt(0).toUpperCase() + word.substr(1).toLowerCase();});
+    var url = `https://secure-mountain-79131.herokuapp.com/campsites/state/${capped}`;
+
+    return fetch(url)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(json) {
+        return json;
+      })
+  },
+
   allCampsites: function() {
-    var url = 'https://secure-mountain-79131.herokuapp.com/campsites';
+    var url = 'https://secure-mountain-79131.herokuapp.com/campsites/';
 
     return fetch(url)
       .then(function(response) {

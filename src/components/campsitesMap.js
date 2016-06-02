@@ -18,13 +18,13 @@ module.exports = React.createClass({
     return {
       annotations: [],
       searchTerm: '',
-      state: 'us',
-      region: {longitudeDelta: 131.8359405964179, latitude: 52.49195113130104, longitude: -104.7812499009146, latitudeDelta: 69.54145563738211},
+      state: 'colorado',
+      region: {longitudeDelta: 10, latitude: 39.17581850567979, longitude: -105.5849862510766, latitudeDelta: 5.424471588580893},
     };
   },
 
   componentWillMount() {
-    API.allCampsites()
+    API.campsitesByState(this.state.state)
       .then((data) => {
         this.setState({
           annotations: data.map(function(c) {
@@ -51,27 +51,6 @@ module.exports = React.createClass({
   },
 
   render() {
-    debugger;
-    /*var campsiteAnnos = Campsites.map(function(c) {
-      return {
-        longitude: c.longitude,
-        latitude: c.latitude,
-        title: c.sitename,
-        rightCalloutView: (
-          <TouchableOpacity
-            onPress={() => this.props.navigator.push({
-              name: 'campsite',
-              passProps: {
-                sitename: c.sitename,
-                id: c._id
-              }
-            })}>
-            <Text>{'Details >'}</Text>
-          </TouchableOpacity>
-        )
-      }
-    }.bind(this));*/
-
     return (
       <View style={styles.container}>
         <MapView
@@ -91,7 +70,6 @@ module.exports = React.createClass({
             style={styles.picker}
             selectedValue={this.state.state}
             onValueChange={this.onPickerChange}>
-            <Picker.Item label="All US" value={'us'} />
             <Picker.Item label="Alabama" value={'alabama'} />
             <Picker.Item label="Alaska" value={'alaska'} />
             <Picker.Item label="Arizona" value={'arizona'} />
@@ -113,6 +91,15 @@ module.exports = React.createClass({
             <Picker.Item label="Maine" value={'maine'} />
             <Picker.Item label="Maryland" value={'maryland'} />
             <Picker.Item label="Massachusetts" value={'massachusetts'} />
+            <Picker.Item label="Michigan" value={'michigan'} />
+            <Picker.Item label="Minnesota" value={'minnesota'} />
+            <Picker.Item label="Mississippi" value={'mississippi'} />
+            <Picker.Item label="Missouri" value={'missouri'} />
+            <Picker.Item label="Montana" value={'montana'} />
+            <Picker.Item label="Nebraska" value={'nebraska'} />
+            <Picker.Item label="Nevada" value={'nevada'} />
+            <Picker.Item label="New Hampshire" value={'new hampshire'} />
+            <Picker.Item label="New Jersey" value={'new jersey'} />
             <Picker.Item label="New Mexico" value={'new mexico'} />
             <Picker.Item label="Oregon" value={'oregon'} />
             <Picker.Item label="Utah" value={'utah'} />
@@ -128,6 +115,30 @@ module.exports = React.createClass({
 
   onRegionChangeComplete: function(region){
     console.log(region);
+    API.campsitesByState(this.state.state)
+      .then((data) => {
+        this.setState({
+          annotations: data.map(function(c) {
+            return {
+              longitude: c.longitude,
+              latitude: c.latitude,
+              title: c.sitename,
+              rightCalloutView: (
+                <TouchableOpacity
+                  onPress={() => this.props.navigator.push({
+                    name: 'campsite',
+                    passProps: {
+                      sitename: c.sitename,
+                      id: c._id
+                    }
+                  })}>
+                  <Text>{'Details >'}</Text>
+                </TouchableOpacity>
+              )
+            }
+          }.bind(this))
+      })
+    })
   },
 
   onDetailsPress: function() {
