@@ -44,5 +44,17 @@ module.exports = {
       .then(function(json) {
         return json;
       })
+  },
+
+  campsiteReviews: function(id) {
+    var url = `https://secure-mountain-79131.herokuapp.com/reviews/${id}`;
+
+    return fetch(url)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(json) {
+        return json;
+      })
   }
 }

@@ -15,14 +15,19 @@ module.exports = React.createClass({
       longitude: 0,
       longitudeDelta: .015,
       latitude: 0,
-      latitudeDelta: .015
+      latitudeDelta: .015,
+      reviews: {}
     }
   },
 
   componentWillMount() {
     API.campsiteDetail(this.props.id)
-      .then((data) => {
+      .then(data => {
         this.setState(data);
+      })
+    API.campsiteReviews(this.props.id)
+      .then(data => {
+        this.setState({reviews: data})
       })
   },
 
@@ -47,6 +52,7 @@ module.exports = React.createClass({
           <Text style={styles.siteText}>Number of campsites: {this.state.numberofsites}</Text>
           <Text style={styles.siteText}>Phone: {this.state.phone}</Text>
           <Text style={styles.siteText}>Website: {this.state.website}</Text>
+          <Text style={styles.siteText}>Number of reviews: {this.state.reviews.length}</Text>
         </View>
       </View>
     );
