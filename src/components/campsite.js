@@ -4,6 +4,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TouchableHighlight,
   TouchableOpacity,
   View
 } from 'react-native';
@@ -59,9 +60,21 @@ module.exports = React.createClass({
         <ScrollView
           style={styles.scrollView}
           contentContainerStyle={styles.scrollViewContent}>
+          <TouchableHighlight
+            style={styles.reviewButton}
+            onPress={() => this.props.navigator.push({
+              name: 'reviewForm',
+              passProps: {
+                id: this.props.id,
+                sitename: this.state.sitename,
+              }
+            })}
+            underlayColor='green'>
+            <Text style={styles.reviewButtonText}>Camped here? Leave a Review!</Text>
+          </TouchableHighlight>
           {this.state.reviews.map(review => {
             return (
-              <View>
+              <View key={review._id}>
                 <View style={styles.wrapper}>
                   <Text><Text style={styles.bold}>User:</Text> {review.user}</Text>
                   <Text><Text style={styles.bold}>Rating:</Text> {review.rating}</Text>
@@ -93,6 +106,8 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     borderTopWidth: 1,
     borderTopColor: 'black',
+    borderBottomWidth: 1,
+    borderBottomColor: 'black',
   },
   bold: {
     fontWeight: 'bold',
@@ -100,15 +115,25 @@ var styles = StyleSheet.create({
   backButton: {
     marginTop: 30
   },
+  reviewButton: {
+    alignSelf: 'center',
+    backgroundColor: '#5cb85c',
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#5cb85c',
+    marginBottom: 10,
+    padding: 5,
+  },
+  reviewButtonText: {
+    color: 'white',
+  },
   scrollView: {
     flex: 7,
     height: 300,
     backgroundColor: '#F5FCFF',
-    borderTopColor: 'black',
-    borderTopWidth: 1,
   },
   scrollViewContent: {
-    marginTop: 15,
+    marginTop: 10,
     marginLeft: 30,
     marginRight: 30,
     marginBottom: 30,

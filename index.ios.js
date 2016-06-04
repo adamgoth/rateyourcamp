@@ -8,10 +8,12 @@ import {
 } from 'react-native';
 import CampsitesMap from './src/components/campsitesMap';
 import Campsite from './src/components/campsite';
+import ReviewForm from './src/components/reviewForm';
 
 var ROUTES = {
   campsitesMap: CampsitesMap,
   campsite: Campsite,
+  reviewForm: ReviewForm,
 }
 
 var rateyourcamp = React.createClass({
