@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   MapView,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -16,7 +17,7 @@ module.exports = React.createClass({
       longitudeDelta: .015,
       latitude: 0,
       latitudeDelta: .015,
-      reviews: {}
+      reviews: [],
     }
   },
 
@@ -46,14 +47,31 @@ module.exports = React.createClass({
           style={styles.map}>
         </MapView>
         <View style={styles.campsiteInfo}>
-          <Text style={styles.siteText}>{this.state.sitename}</Text>
-          <Text style={styles.siteText}>Located {this.state.distancefromtown} miles from {this.state.nearesttown}, {this.state.state}</Text>
-          <Text style={styles.siteText}>Longitude: {this.state.longitude}, Latitude: {this.state.latitude}</Text>
-          <Text style={styles.siteText}>Number of campsites: {this.state.numberofsites}</Text>
-          <Text style={styles.siteText}>Phone: {this.state.phone}</Text>
-          <Text style={styles.siteText}>Website: {this.state.website}</Text>
-          <Text style={styles.siteText}>Number of reviews: {this.state.reviews.length}</Text>
+          <Text style={styles.bold}>{this.state.sitename}</Text>
+          <Text>Located {this.state.distancefromtown} miles from {this.state.nearesttown}, {this.state.state}</Text>
+          <Text><Text style={styles.bold}>Longitude:</Text> {this.state.longitude} <Text style={styles.bold}>Latitude:</Text> {this.state.latitude}</Text>
+          <Text><Text style={styles.bold}>Number of campsites:</Text> {this.state.numberofsites}</Text>
+          <Text><Text style={styles.bold}>Phone:</Text> {this.state.phone}</Text>
+          <Text><Text style={styles.bold}>Website:</Text> {this.state.website}</Text>
+          <Text><Text style={styles.bold}>Number of reviews: </Text>{this.state.reviews.length}</Text>
+          <Text><Text style={styles.bold}>Average rating:</Text> ?</Text>
         </View>
+        <ScrollView
+          style={styles.scrollView}
+          contentContainerStyle={styles.scrollViewContent}>
+          {this.state.reviews.map(review => {
+            return (
+              <View>
+                <View style={styles.wrapper}>
+                  <Text><Text style={styles.bold}>User:</Text> {review.user}</Text>
+                  <Text><Text style={styles.bold}>Rating:</Text> {review.rating}</Text>
+                  <Text style={{fontStyle: 'italic'}}>Two days ago</Text>
+                </View>
+                <Text style={styles.reviewText}>{review.review}</Text>
+              </View>
+            )
+          })}
+        </ScrollView>
       </View>
     );
   }
@@ -69,12 +87,31 @@ var styles = StyleSheet.create({
   },
   campsiteInfo: {
     flex: 1,
+    backgroundColor: '#F2FCF5',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  siteText: {
-    alignSelf: 'center',
-    marginTop: 5,
+  bold: {
+    fontWeight: 'bold',
   },
   backButton: {
     marginTop: 30
-  }
+  },
+  scrollView: {
+    flex: 2,
+    height: 300,
+    backgroundColor: '#F5FCFF',
+  },
+  scrollViewContent: {
+    margin: 30
+  },
+  reviewText: {
+    marginBottom: 15,
+    padding: 7,
+  },
+  wrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
 });
