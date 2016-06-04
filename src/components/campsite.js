@@ -80,16 +80,19 @@ module.exports = React.createClass({
 var styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#F5FCFF',
   },
   map: {
-    flex: 1,
+    flex: 5,
     marginTop: 5,
   },
   campsiteInfo: {
-    flex: 1,
+    flex: 4,
     backgroundColor: '#F2FCF5',
     justifyContent: 'center',
     alignItems: 'center',
+    borderTopWidth: 1,
+    borderTopColor: 'black',
   },
   bold: {
     fontWeight: 'bold',
@@ -98,12 +101,17 @@ var styles = StyleSheet.create({
     marginTop: 30
   },
   scrollView: {
-    flex: 2,
+    flex: 7,
     height: 300,
     backgroundColor: '#F5FCFF',
+    borderTopColor: 'black',
+    borderTopWidth: 1,
   },
   scrollViewContent: {
-    margin: 30
+    marginTop: 15,
+    marginLeft: 30,
+    marginRight: 30,
+    marginBottom: 30,
   },
   reviewText: {
     marginBottom: 15,

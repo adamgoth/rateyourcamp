@@ -152,10 +152,10 @@ module.exports = React.createClass({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'stretch',
+    backgroundColor: '#F5FCFF',
   },
   searchBar: {
+    marginTop: 5,
     padding: 10,
     height: 40,
     width: 250,
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 6,
-    marginTop: 30
+    marginTop: 30,
   },
   bottomView: {
     flex: 5,
