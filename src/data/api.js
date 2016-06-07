@@ -56,5 +56,38 @@ module.exports = {
       .then(function(json) {
         return json;
       })
+  },
+
+  postReview: function(user, rating, review, campsite_id) {
+    var url = 'https://secure-mountain-79131.herokuapp.com/reviews';
+    var formData = {
+      user: user,
+      rating: rating,
+      review: review,
+      campsite_id: campsite_id,
+    }
+
+    var formBody = [];
+    for (var key in formData) {
+      var encodedKey = encodeURIComponent(key);
+      var encodedValue = encodeURIComponent(formData[key]);
+      formBody.push(encodedKey + "=" + encodedValue);
+    }
+    formBody = formBody.join("&");
+
+    return fetch(url, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      },
+      body: formBody
+    })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(json) {
+        return json;
+      })
   }
 }

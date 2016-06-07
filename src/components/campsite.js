@@ -15,9 +15,9 @@ module.exports = React.createClass({
     return {
       sitename: '',
       longitude: 0,
-      longitudeDelta: .015,
+      longitudeDelta: .01,
       latitude: 0,
-      latitudeDelta: .015,
+      latitudeDelta: .01,
       reviews: [],
     }
   },
@@ -78,7 +78,7 @@ module.exports = React.createClass({
                 <View style={styles.wrapper}>
                   <Text><Text style={styles.bold}>User:</Text> {review.user}</Text>
                   <Text><Text style={styles.bold}>Rating:</Text> {review.rating}</Text>
-                  <Text style={{fontStyle: 'italic'}}>Two days ago</Text>
+                  <Text style={{fontStyle: 'italic'}}>{review.created_on}</Text>
                 </View>
                 <Text style={styles.reviewText}>{review.review}</Text>
               </View>

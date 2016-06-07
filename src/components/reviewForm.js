@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Alert,
   StyleSheet,
   Text,
   TextInput,
@@ -7,11 +8,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import API from '../data/api';
 
 module.exports = React.createClass({
   getInitialState: function() {
     return {
-      name: '',
+      user: '',
       rating: '',
       review: '',
     }
@@ -30,8 +32,8 @@ module.exports = React.createClass({
           <Text>What is your name?</Text>
           <TextInput
             style={styles.input}
-            onChangeText={name => this.setState({name})}
-            value={this.state.name}
+            onChangeText={user => this.setState({user})}
+            value={this.state.user}
           />
           <Text>Rating:</Text>
           <TextInput
@@ -48,13 +50,24 @@ module.exports = React.createClass({
           />
           <TouchableHighlight
             style={styles.submitButton}
-            onPress={() => { console.log("lol") }}
+            onPress={this.onSubmitPress}
             underlayColor='green'>
             <Text style={styles.submitButtonText}>Submit Review</Text>
           </TouchableHighlight>
         </View>
       </View>
     )
+  },
+
+  onSubmitPress: function() {
+    API.postReview(this.state.user, this.state.rating, this.state.review, this.props.id)
+      .then(() => { this.props.navigator.replacePreviousAndPop({
+          name: 'campsite',
+          passProps: {
+            id: this.props.id
+          }
+        })
+      })
   }
 });
 
