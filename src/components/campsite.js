@@ -9,6 +9,7 @@ import {
   View
 } from 'react-native';
 import API from '../data/api';
+import moment from 'moment';
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -72,13 +73,13 @@ module.exports = React.createClass({
             underlayColor='green'>
             <Text style={styles.reviewButtonText}>Camped here? Leave a Review!</Text>
           </TouchableHighlight>
-          {this.state.reviews.map(review => {
+          {this.state.reviews.reverse().map(review => {
             return (
               <View key={review._id}>
                 <View style={styles.wrapper}>
                   <Text><Text style={styles.bold}>User:</Text> {review.user}</Text>
                   <Text><Text style={styles.bold}>Rating:</Text> {review.rating}</Text>
-                  <Text style={{fontStyle: 'italic'}}>{review.created_on}</Text>
+                  <Text style={{fontStyle: 'italic'}}>{moment(review.created_on).format('YYYY-DD-MM')}</Text>
                 </View>
                 <Text style={styles.reviewText}>{review.review}</Text>
               </View>
