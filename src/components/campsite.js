@@ -32,6 +32,16 @@ module.exports = React.createClass({
       .then(data => {
         this.setState({reviews: data})
       })
+
+  },
+
+  averageRating: function(reviews) {
+    if (reviews.length === 0)
+      return "n/a"
+    var total = reviews.reduce(function(a ,b) {
+      return {x: Number(a.rating) + Number(b.rating)}
+    })
+    return Number(total.x) / Number(reviews.length)
   },
 
   render: function() {
@@ -56,7 +66,7 @@ module.exports = React.createClass({
           <Text><Text style={styles.bold}>Phone:</Text> {this.state.phone}</Text>
           <Text><Text style={styles.bold}>Website:</Text> {this.state.website}</Text>
           <Text><Text style={styles.bold}>Number of reviews: </Text>{this.state.reviews.length}</Text>
-          <Text><Text style={styles.bold}>Average rating:</Text> ?</Text>
+          <Text><Text style={styles.bold}>Average rating:</Text> {this.averageRating(this.state.reviews)} out of 5</Text>
         </View>
         <ScrollView
           style={styles.scrollView}
