@@ -36,16 +36,16 @@ module.exports = React.createClass({
   },
 
   averageRating: function(reviews) {
+    console.log(reviews);
     if (reviews.length === 0)
       return "n/a"
-    var total = reviews.reduce(function(a ,b) {
-      return {x: Number(a.rating) + Number(b.rating)}
-    })
-    return Number(total.x) / Number(reviews.length)
+    var total = reviews.map(obj => { return obj.rating }).reduce((a,b) => { return a + b })
+    console.log(typeof total);
+    console.log(typeof reviews.length);
+    return Number(total) / Number(reviews.length)
   },
 
   render: function() {
-    //var mockedCampsite = {"_id":"571acfb2d2a89ea2bdba4f7a","sitename":"Alder Dune","nearesttown":"Florence","state":"Oregon","country":"USA","website":"","region":"West","longitude":-124.102,"latitude":44.069,"phone":"541.563.3211/541.750.7000","numberofsites":43,"distancefromtown":6};
     return (
       <View style={styles.container}>
         <TouchableOpacity
