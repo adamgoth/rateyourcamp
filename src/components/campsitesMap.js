@@ -9,7 +9,6 @@ import {
   View
 } from 'react-native';
 
-import Campsites from '../data/campsites';
 import Regions from '../data/regions';
 import API from '../data/api';
 
@@ -101,7 +100,16 @@ module.exports = React.createClass({
             <Picker.Item label="New Hampshire" value={'new hampshire'} />
             <Picker.Item label="New Jersey" value={'new jersey'} />
             <Picker.Item label="New Mexico" value={'new mexico'} />
+            <Picker.Item label="New York" value={'new york'} />
+            <Picker.Item label="North Carolina" value={'north carolina'} />
+            <Picker.Item label="North Dakota" value={'north dakota'} />
+            <Picker.Item label="Ohio" value={'ohio'} />
+            <Picker.Item label="Oklahoma" value={'oklahoma'} />
             <Picker.Item label="Oregon" value={'oregon'} />
+            <Picker.Item label="Pennsylvania" value={'pennsylvania'} />
+            <Picker.Item label="Rhode Island" value={'rhode island'} />
+            <Picker.Item label="South Carolina" value={'south carolina'} />
+            <Picker.Item label="South Dakota" value={'south dakota'} />
             <Picker.Item label="Utah" value={'utah'} />
           </Picker>
         </View>
