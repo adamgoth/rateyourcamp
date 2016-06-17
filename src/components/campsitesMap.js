@@ -110,7 +110,15 @@ module.exports = React.createClass({
             <Picker.Item label="Rhode Island" value={'rhode island'} />
             <Picker.Item label="South Carolina" value={'south carolina'} />
             <Picker.Item label="South Dakota" value={'south dakota'} />
+            <Picker.Item label="Tennessee" value={'tennessee'} />
+            <Picker.Item label="Texas" value={'texas'} />
             <Picker.Item label="Utah" value={'utah'} />
+            <Picker.Item label="Vermont" value={'vermont'} />
+            <Picker.Item label="Virginia" value={'virginia'} />
+            <Picker.Item label="Washington" value={'washington'} />
+            <Picker.Item label="West Virginia" value={'west virginia'} />
+            <Picker.Item label="Wisconsin" value={'wisconsin'} />
+            <Picker.Item label="Wyoming" value={'wyoming'} />
           </Picker>
         </View>
       </View>
